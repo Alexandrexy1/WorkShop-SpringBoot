@@ -1,12 +1,17 @@
 package com.firstproject.demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +26,10 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String passowrd;
+	
+	@OneToMany(mappedBy = "client") // takes the variable that is calling class User in class Order
+	@JsonIgnore // it returns the Order along with the User
+	private List<Order> orders = new ArrayList<>();
 	
 	public User() {}
 
@@ -71,7 +80,11 @@ public class User implements Serializable {
 	public void setPassowrd(String passowrd) {
 		this.passowrd = passowrd;
 	}
-
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -88,7 +101,4 @@ public class User implements Serializable {
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
 }
