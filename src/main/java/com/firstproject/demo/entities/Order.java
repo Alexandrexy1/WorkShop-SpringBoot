@@ -5,8 +5,6 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 import com.firstproject.demo.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
@@ -48,13 +46,17 @@ public class Order implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Instant getDate() {
 		return date;
 	}
 	
-	public User getClient() {
-		return client;
+	public void setDate(Instant date) {
+		this.date = date;
 	}
 	
 	public OrderStatus getOrderStatus() {
@@ -64,7 +66,11 @@ public class Order implements Serializable {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus.getCode();
 	}
-
+	
+	public User getClient() {
+		return client;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
