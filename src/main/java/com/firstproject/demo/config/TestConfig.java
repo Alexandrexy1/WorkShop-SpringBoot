@@ -40,11 +40,10 @@ public class TestConfig implements CommandLineRunner {
 	// Create tables
 	@Override
 	public void run(String... args) throws Exception {
-		
-		
 		Category category1 = new Category(null, "Eletronics");
 		Category category2 = new Category(null, "Laptops");
 		Category category3 = new Category(null, "Books");
+		Category category4 = new Category(null, "Computer");
 		
 		Product product1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
 		Product product2 = new Product(null, "Smart TV 4K", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
@@ -52,9 +51,17 @@ public class TestConfig implements CommandLineRunner {
 		Product product4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product product5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 		
-		productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
-		categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
 		
+		categoryRepository.saveAll(Arrays.asList(category1, category2, category3, category4));
+		
+		product1.getCategories().add(category3);
+		product2.getCategories().add(category1);
+		product3.getCategories().add(category2);
+		product3.getCategories().add(category4);
+		product4.getCategories().add(category4);
+		product5.getCategories().add(category3);
+		
+		productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
 		
 		User user1 = new User(null, "Alexandre", "alexandre@test.com", "122222222", "123456");
 		User user2 = new User(null, "Maria", "maria@test.com", "133333333", "654321");	
