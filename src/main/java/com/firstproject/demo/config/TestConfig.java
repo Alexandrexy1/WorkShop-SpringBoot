@@ -2,7 +2,6 @@ package com.firstproject.demo.config;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.lang.Exception;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.firstproject.demo.entities.Category;
 import com.firstproject.demo.entities.Order;
+import com.firstproject.demo.entities.OrderProduct;
 import com.firstproject.demo.entities.Product;
 import com.firstproject.demo.entities.User;
 import com.firstproject.demo.entities.enums.OrderStatus;
 import com.firstproject.demo.repositories.CategoryRepository;
+import com.firstproject.demo.repositories.OrderProductRepository;
 import com.firstproject.demo.repositories.OrderRepository;
 import com.firstproject.demo.repositories.ProductRepository;
 import com.firstproject.demo.repositories.UserRepository;
@@ -36,6 +37,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderProductRepository orderProductRepository;
 	
 	// Create tables
 	@Override
@@ -72,5 +76,13 @@ public class TestConfig implements CommandLineRunner {
 		
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4));
+		
+		OrderProduct oi1 = new OrderProduct(order1, product1, 2, product1.getPrice());
+		OrderProduct oi2 = new OrderProduct(order1, product2, 1, product3.getPrice());	
+		OrderProduct oi3 = new OrderProduct(order3, product3, 2, product3.getPrice());
+		OrderProduct oi4 = new OrderProduct(order4, product5, 2, product4.getPrice()); 
+		
+		
+		orderProductRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 }
