@@ -25,7 +25,7 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	private String phone;
-	private String passowrd;
+	private String password;
 	
 	@OneToMany(mappedBy = "client") // takes the variable that is calling class User in class Order
 	@JsonIgnore // it returns the Order along with the User
@@ -33,12 +33,12 @@ public class User implements Serializable {
 	
 	public User() {}
 
-	public User(Long id, String name, String email, String phone, String passowrd) {
+	public User(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
-		this.passowrd = passowrd;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -74,12 +74,12 @@ public class User implements Serializable {
 	}
 
 	@JsonIgnore
-	public String getPassowrd() {
-		return passowrd;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassowrd(String passowrd) {
-		this.passowrd = passowrd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public List<Order> getOrders() {
